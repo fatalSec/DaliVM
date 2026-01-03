@@ -490,13 +490,10 @@ See [DEVGUIDE.md](DEVGUIDE.md) for detailed instructions on:
 ---
 
 ## Requirements
-
 - Python 3.8+
-- androguard
 - See `requirements.txt` for full list
 
 ---
 
 ## License
-
-MIT License
+GPL v3 License
