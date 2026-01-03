@@ -1,0 +1,29 @@
+python3 emulate.py test.apk "LCryptoHelper;->transform"
+
+python3 emulate.py test.apk "LCryptoHelper;->decrypt"
+
+python3 emulate.py app-prod-release_20240906_0930.apk "Lutil/v/ˊ/ʽ;->a_"
+
+python3 emulate.py app-prod-release_20240906_0930.apk "Lutil/v/ˊ/ˏ;->ˋ"
+
+python3 emulate.py app-prod-release_20240906_0930.apk "Lutil/v/ˊ/ʽ;->ˎ"
+
+python3 emulate.py forwardtest.apk "LForwardLookupTests;->testInstanceFieldWrite"
+
+python3 emulate.py forwardtest.apk "LForwardLookupTests;->testArrayPutLoop"
+
+python3 emulate.py forwardtest.apk "LForwardLookupTests;->testArrayPutDirect"
+
+python3 emulate.py forwardtest.apk "LForwardLookupTests;->testBuilderChain"
+
+python3 emulate.py forwardtest.apk "LForwardLookupTests;->testStaticFieldWrite"
+
+python3 emulate.py forwardtest.apk "LForwardLookupTests;->testStaticArrayInit"
+
+python3 emulate.py forwardtest.apk "LForwardLookupTests;->testCheckCastUsage"
+
+python3 emulate.py forwardtest.apk "LForwardLookupTests;->testNestedObjectInit"
+
+python3 emulate.py forwardtest.apk "LForwardLookupTests;->testArrayOfObjects"
+
+python3 emulate.py forwardtest.apk "LForwardLookupTests;->testSynchronizedBlock"

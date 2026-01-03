@@ -1,0 +1,7 @@
+# Dalvik Bytecode Emulator Dependencies
+
+# Core dependency for APK/DEX parsing and analysis
+androguard>=3.4.0
+
+# Testing (optional, for running test suite)
+pytest>=7.0.0
