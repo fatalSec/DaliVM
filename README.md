@@ -327,63 +327,6 @@ When backward analysis finds allocation instructions, forward lookup scans for i
 - Supports cross-class static field resolution
 
 ---
-
-## Library Usage
-
-Use the emulator programmatically in your own scripts:
-
-```python
-#!/usr/bin/env python3
-from androguard.misc import AnalyzeAPK
-from dalvik_vm.dex_parser import DexParser
-from dalvik_vm.class_loader import LazyClassLoader
-from dalvik_vm.memory import reset_static_field_store
-from emulate import find_method, find_all_call_sites, emulate_with_args, build_trace_map
-
-def decrypt_all_strings(apk_path: str, decrypt_method: str):
-    """Find all calls to decrypt method and emulate them."""
-    
-    # Parse APK
-    a, d, dx = AnalyzeAPK(apk_path)
-    parser = DexParser(apk_path)
-    
-    # Parse target method
-    parts = decrypt_method.split("->")
-    target_class, target_name = parts[0], parts[1].split("(")[0]
-    
-    # Find method
-    target_am, target_em = find_method(dx, target_class, target_name)
-    if not target_em:
-        print(f"Method not found: {decrypt_method}")
-        return []
-    
-    # Find all call sites
-    call_sites = find_all_call_sites(dx, parser, target_class, target_name, target_am)
-    
-    # Emulate each
-    results = []
-    for site in call_sites:
-        reset_static_field_store()
-        class_loader = LazyClassLoader(dx, parser, build_trace_map)
-        class_loader._run_clinit(target_class)
-        
-        result = emulate_with_args(target_em, site['args'], dx, parser, class_loader)
-        results.append({
-            'caller': site['caller'],
-            'args': site['args'],
-            'decrypted': result
-        })
-    
-    return results
-
-if __name__ == "__main__":
-    results = decrypt_all_strings("app.apk", "LDecryptor;->decrypt")
-    for r in results:
-        print(f"{r['caller']}: {r['decrypted']}")
-```
-
----
-
 ## Configuration
 
 Customize mock behavior via `dalvik_vm/mocks/config.py`:
@@ -442,7 +385,6 @@ dalvik-emulator/
 │   ├── test_opcodes.py     # Opcode unit tests
 │   ├── test_android_mocks.py   # Mock tests
 │   └── test_hooks.py       # Hook tests
-└── ForwardLookupTests.java # Java test cases
 ```
 
 ---
